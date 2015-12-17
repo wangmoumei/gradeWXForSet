@@ -1,0 +1,16 @@
+{
+  "name": "gradewx",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.8.2",
+    "zepto": "~1.1.6",
+    "frozenui": "",
+    "backbone": "",
+    "animate.css":"~3.4.0"
+  },
+  "devDependencies": {
+        "chai": "~3.3.0",
+        "mocha": "~2.3.3"
+    }
+}
+

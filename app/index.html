@@ -1,0 +1,185 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>寝室打分</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/FrozenUI/1.3.0/css/frozen.css" />
+    <link rel="stylesheet" href="http://7xp0c4.com2.z0.glb.qiniucdn.com/iconfont-1.02.css" />
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    
+  </head>
+  <body>
+    <div class="ui-loading-block show" id="loading">
+        <div class="ui-loading-cnt">
+            <i class="ui-loading-bright"></i>
+            <p>正在加载中...</p>
+        </div>
+    </div>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div id="roomList" class="fadeIn animated">
+      <header class="ui-header ui-header-positive ui-border-b">
+          <h1>寝室打分</h1>
+      </header>
+      
+      
+      <ul class="ui-row ui-border-t grade-progress" id="gradeProgress">
+          <li class="ui-col ui-col-80">
+            <div class="ui-progress">
+                <span style="width:20%"></span>
+            </div>
+          </li>
+          <li class="ui-col ui-col-20"><span>20</span>/100</li>
+      </ul>
+      <ul id="selecter" class="ui-row ui-border-b">
+          <li class="ui-col ui-col-50 ui-border-r" id="selectArea">宿舍区</li>
+          <li class="ui-col ui-col-50" id="selectFlat">楼栋</li>
+      </ul>
+      <div id="roomScroller">
+        <div>
+          <ul class="ui-row room-list">
+            <li class="ui-col ui-col-25 finished"><div class="ui-border-radius">101</div></li>
+            <li class="ui-col ui-col-25 finished"><div class="ui-border-radius">102</div></li>
+            <li class="ui-col ui-col-25 finished"><div class="ui-border-radius">103</div></li>
+            <li class="ui-col ui-col-25"><div class="ui-border-radius">104</div></li>
+            <li class="ui-col ui-col-25"><div class="ui-border-radius">105</div></li>
+            <li class="ui-col ui-col-25"><div class="ui-border-radius">106</div></li>
+            <li class="ui-col ui-col-25"><div class="ui-border-radius">107</div></li>
+          </ul>
+        </div>
+      </div>
+      <script type="text/template" id="selectRoomTemplate">
+        <ul class="ui-row room-list">
+          <% 
+          var n = list.models[0]?parseInt(parseInt(list.models[0].get('name'))/100):0;
+          for(var i=0;i<list.length;i++){
+           if(parseInt(parseInt(list.models[i].get('name'))/100) != n) {
+              print('</ul><ul class="ui-row room-list">');
+              n = parseInt(parseInt(list.models[i].get('name'))/100);
+           }
+          %>
+            <li class="ui-col ui-col-25 <%=list.models[i].get('status')?'finished':''%>" data-real="<%= i %>"><div class="ui-border-radius"><%= list.models[i].get('name') %></div></li>
+          <%}%>
+        </ul>
+      </script>
+      <div id="selectBox" class="ui-actionsheet hide animated">  
+				<div class="ui-actionsheet-cnt">
+          <h4>选择</h4>
+            <div id="selectScroller">
+                <ul class="select-list">
+                    <li><a>今天</a></li>
+                    <li><a>今天</a></li>
+                </ul>
+            </div>
+					<button id="selectBoxClose">取消</button> 
+				</div>
+        <script type="text/template" id="selectAreaTemplate">
+            <% for(var i=0;i<list.length;i++){%>
+              <li data-real="<%= i %>"><a><%= list.models[i].get('name') %></a></li>
+            <%}%>
+        </script>
+        <script type="text/template" id="selectFlatTemplate">
+            <% for(var i=0;i<list.length;i++){%>
+              <li data-real="<%= i %>"><a><%= list.models[i].get('name') %></a></li>
+            <%}%>
+        </script>       
+			</div>
+    </div>
+    <section id="login" class="fadeIn animated hide">
+        <header class="ui-header ui-header-positive">
+            <h1>打分员登录</h1>
+        </header>
+        <div id="userInfo">
+          <div class="ui-form-item ui-form-item-show ui-border-tb">
+                <label for="username">账号</label>
+                <input id="username" type="text">
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label for="password">密码</label>
+                <input id="password" type="password">
+            </div>
+            <div class="sub-box">
+                <button id="userLogin">
+                    登 录
+                </button>
+            </div>
+        </div>
+    </section>
+    <section id="grade" class="fadeIn animated hide">
+      
+    </section>
+    <script type="text/template" id="selectGradeTemplate">
+      <header class="ui-header ui-header-positive">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1><%=title%> - <%=room.get('name')%></h1>
+        <a id="gradeReset">重置</a>
+      </header>
+      <div id="gradeScroller">
+        <ul class="ui-list ui-list-text ui-border-tb">
+          <% var sum=0;
+          for(var i=0;i<room.get('grade').length;i++){ 
+            sum += room.get('grade')[i].grade;
+          %>
+          <li class="ui-border-t">
+              <div class="ui-list-info">
+                  <h4><%=room.get('grade')[i].name%></h4>
+              </div>
+              <div class="ui-badge-wrap ui-border-radius"><%= room.get('grade')[i].grade %><div class="ui-badge-cornernum" style="display:none">0</div></div>
+          </li>
+          <%}%>
+        </ul>
+      </div>
+      <div class="ui-row-flex grade-sum ui-border-t">
+          <div class="grade-num ui-col">
+            <span id="gradeSum"><%=sum%></span>分
+          </div>
+          <div class="grade-save" id="gradeSave">保存并进入下一个</div>
+      </div>
+    </script>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/zepto/zepto.js"></script>
+    <script src="/bower_components/frozenui/dist/js/frozen.js"></script>
+    <script src="/bower_components/underscore/underscore.js"></script>
+    <script src="/bower_components/backbone/backbone.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    
+    <!-- build:js(.) scripts/plugins.js -->
+
+    <!-- endbuild -->
+    
+
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <script src="scripts/init.js"></script>
+    <script src="scripts/Router.js"></script>
+    <script src="scripts/model/Area.js"></script>
+    <script src="scripts/model/Flat.js"></script>
+    <script src="scripts/model/User.js"></script>
+    <script src="scripts/model/Room.js"></script>
+    
+    <script src="scripts/view/Index.js"></script>
+    <script src="scripts/view/Grade.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>

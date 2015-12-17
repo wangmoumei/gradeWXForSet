@@ -1,0 +1,213 @@
+body{
+	font-family: 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif
+}
+.ui-header{
+	background-color: #228feb;
+	z-index: 1;
+}
+section{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;right:0;
+	background:#f8f8f8;
+	padding-top:45px;
+	&.show{
+		z-index:2;
+		display:block;
+	}
+	&.hide{
+		z-index:1;
+		display:none;
+	}
+}
+section.animated{
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+}
+.sub-box{
+	padding: 15px;
+	background-color: #f8f8f8;
+	button{
+		background-color: #228feb;
+		color: #fff;
+		text-align: center;
+		height: 44px;
+		line-height: 44px;
+		display: block;
+		width: 100%;
+		border-radius: 5px;
+		&:active{
+			background:#2272eb;
+		}
+	}
+}
+#roomList{
+	padding-top: 45px;
+	#selecter{
+		background-color:#fff;
+		text-align: center; 
+		li{
+			position: relative;
+			padding: 5px 0;
+			color: #333;
+			&::after{
+				font-family: "ALiconfont" !important;
+				content: "\e62d";
+				font-size: 16px;
+				font-style: normal;
+				-webkit-font-smoothing: antialiased;
+				-webkit-text-stroke-width: 0.2px;
+				position: absolute;
+				right: 10%;
+				top: 8px;
+			}
+			&:active{
+				background:rgba(0,0,0,.05);
+			}
+		}
+	}
+	.grade-progress{
+		background-color: #fbf9fe;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 40px;
+		z-index: 10;
+		li:nth-of-type(1){
+			padding: 19px 20px 18px 20px;
+			div{
+				height: 3px;
+			}
+		}
+		li:nth-of-type(2){
+			line-height: 40px;
+			text-align: right;
+			font-size: 14px;
+			padding-right: 20px;
+			color: #888;
+			span{
+				color: #65d521;
+			}
+		}
+	}
+	#roomScroller{
+		overflow: hidden;
+		.room-list{
+			padding:10px 5px;
+			li{
+				padding: 5px 10px;
+				color: #333;
+				div{
+					height: 30px;
+					line-height: 30px;
+					font-size: 14px;
+					text-align: center;
+					background-color: #fff;
+					&:active{
+						background:rgba(0,0,0,.05);
+					}
+				}
+				&:nth-of-type(1){
+					div{
+						color: #228feb;
+					}
+				}
+				&.finished{
+					div{
+						background-color: rgb(92,184,92);
+						color: #fff;
+					}
+				}
+				
+			}
+		}
+	}
+	#selectBox{
+		&.animated{
+			-webkit-animation-duration: .3s;
+    		animation-duration: .3s;
+		}
+		#selectScroller{
+			max-height: 250px;
+			overflow:hidden;
+			.select-list{
+				li a{
+					display: block;
+					background: rgba(255,255,255,.84);
+					background-position: left top;
+					background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.5,transparent),color-stop(0.5,#e0e0e0),to(#e0e0e0));
+					background-repeat: repeat-x;
+					-webkit-background-size: 100% 1px;
+				}
+				li:active{
+					opacity: 0.84;
+				}
+			}
+		}
+		button,.select-list li a{
+			font-size: 16px;
+			box-sizing: border-box;
+			line-height: 40px;
+			height: 40px;
+			color: #333;
+		}
+	}
+}
+#login{
+	#userInfo{
+		background-color: #fff; 
+		label{
+			text-align: center;
+		}
+	}
+}
+#grade{
+	#gradeReset{
+		color: #fff;
+		position: absolute;
+		height: 45px;
+		line-height: 45px;
+		right:10px;top:0;
+	}
+	#gradeScroller {
+		overflow: hidden;
+		li{
+			height: 30px;
+			line-height: 30px;
+			.ui-badge-wrap{
+				width: 80px;
+				border-radius: 10px;
+				&:active{
+					background:rgba(0,0,0,.05);
+				}
+			}
+		}
+	}
+	.grade-sum{
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		background-color: #fff;
+		.grade-num{
+			color: #228feb;
+			span{
+				font-size: 25px;
+				font-weight: bold;
+				display: inline-block;
+				padding-left: 20px;
+				padding-right: 5px;
+			}
+		}
+		.grade-save{
+			width: 160px;
+			text-align: center;
+			font-size: 15px;
+			background-color: #228feb;
+			color: #fff;
+			&:active{background-color:#2272eb}
+		}
+	}
+}
