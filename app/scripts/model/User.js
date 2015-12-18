@@ -1,7 +1,6 @@
 App.Models.UserModel = Backbone.Model.extend({
     defaults: {
         id:0,
-		fid:0,
         name: ''
     }
 });

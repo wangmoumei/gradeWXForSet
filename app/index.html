@@ -134,22 +134,22 @@
       </header>
       <div id="gradeScroller">
         <ul class="ui-list ui-list-text ui-border-tb">
-          <% var sum=0;
+          <% 
           for(var i=0;i<room.get('grade').length;i++){ 
-            sum += room.get('grade')[i].grade;
+            
           %>
           <li class="ui-border-t">
               <div class="ui-list-info">
                   <h4><%=room.get('grade')[i].name%></h4>
               </div>
-              <div class="ui-badge-wrap ui-border-radius"><%= room.get('grade')[i].grade %><div class="ui-badge-cornernum" style="display:none">0</div></div>
+              <button class="ui-badge-wrap ui-border-radius" data-real="<%=i%>"><%= room.get('grade')[i].grade %><span class="ui-badge-cornernum" style="display:none">0</span></button>
           </li>
           <%}%>
         </ul>
       </div>
       <div class="ui-row-flex grade-sum ui-border-t">
           <div class="grade-num ui-col">
-            <span id="gradeSum"><%=sum%></span>分
+            <span id="gradeSum"><%=room.get('sum')%></span>分
           </div>
           <div class="grade-save" id="gradeSave">保存并进入下一个</div>
       </div>
