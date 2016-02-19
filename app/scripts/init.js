@@ -1,13 +1,13 @@
 'use strict';
-var APIServerHost='http://192.168.18.121:8080/Geese_BUS';
+var APIServerHost='http://192.168.18.121:8080/Geese_nbgy';
 var App = {
     Models: {},
     Routers: {},
     Collections: {},
     Views: {},
-    UniversityId:'',
+    UniversityId:null,
     zIndex:1,
-    openid:'aaa',
+    openid:null,
     loading:function(status){
         if(status){
             $('#loading').addClass('show').removeClass('hide');
@@ -18,7 +18,14 @@ var App = {
     URL:{
     	//Token:'http://121.40.49.110/Token',
         //Token:'http://120.26.48.150:82/Geese.Houqinbao.Auth/Token',
-    	getUser:APIServerHost + '/user/findByOpenid/'
+    	getUser:APIServerHost + '/systemuser/loginbefore/',
+        login:APIServerHost + '/systemuser/login/',
+        getArea:APIServerHost + '/livearea/findAllArea/',
+        getFlat:APIServerHost + '/flat/findbyAreaid/',
+        getRoom:APIServerHost + '/rooms/findbyflatid/',
+        getGradeList:APIServerHost + '/roommrkitems/getRoommrkitems/',
+        getRoomGrade:APIServerHost + '/roomScore/findbyroomidandweeknum/',
+        setGrade:APIServerHost + '/roomItemMarks/batchMarkRoomItemcore'
     }
 };
 Date.prototype.Format = function (fmt) { //author: meizz 

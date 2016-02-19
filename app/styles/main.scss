@@ -93,6 +93,11 @@ section.animated{
 	}
 	#roomScroller{
 		overflow: hidden;
+        .ui-notice{
+            height: auto;
+            top:80px;bottom:0;
+            z-index:1;
+        }
 		.room-list{
 			padding:10px 5px;
 			li{
@@ -209,7 +214,21 @@ section.animated{
 			font-size: 15px;
 			background-color: #228feb;
 			color: #fff;
+            &::before{
+                content: "保存并进入下一个";
+            }
 			&:active{background-color:#2272eb}
+		}
+        .grade-edit-save{
+			width: 180px;
+			text-align: center;
+			font-size: 15px;
+			background-color: #ff9501;
+			color: #fff;
+            &::before{
+                content: "保存修改并进入下一个";
+            }
+			&:active{background-color:#ffa201;}
 		}
 	}
 }

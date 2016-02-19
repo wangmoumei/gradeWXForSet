@@ -1,8 +1,10 @@
 App.Models.FlatModel = Backbone.Model.extend({
     defaults: {
-        id:0,
-		aid:0,
-        name: ''
+        flatid:0,
+		areaid:0,
+        flatname: '',
+        flatnum:0,
+        floornums:0
     }
 });
 App.Collections.FlatList = Backbone.Collection.extend({

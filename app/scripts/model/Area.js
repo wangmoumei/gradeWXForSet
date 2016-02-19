@@ -1,7 +1,7 @@
 App.Models.AreaModel = Backbone.Model.extend({
     defaults: {
-        id:0,
-        name: ''
+        areaid:0,
+        areaname: ''
     }
 });
 App.Collections.AreaList = Backbone.Collection.extend({
